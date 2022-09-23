@@ -1,6 +1,5 @@
-function sayHello(person: string) {
-    return 'Hello, ' + person;
-}
+let message: string = 'Hello, TypeScript!!!!!EEEEEEEEE';
+let heading = document.createElement('h1');
+heading.textContent = message;
 
-let user = [0, 1, 2];
-console.log(sayHello(user));
+document.body.appendChild(heading);

@@ -26,3 +26,27 @@ error TS6053: File 'app.ts' not found.
 1. 新增一個資料夾，並將要 compiler 的檔案放到該資料夾內
 2. command line 切換到該資料夾
 3. 執行 tsc app.ts 即可
+
+
+
+## 使用 interface 定義有回傳值的 function 型別
+
+* 定義 function getProduct 的型別
+```
+interface Product{
+    id: number,
+    name: string,
+    price: number
+};
+```
+
+* 指定 getProduct 的型別
+```
+function getProduct(id) : Product{
+  return {
+    id: id,
+    name: `Awesome Gadget ${id}`,
+    price: 99.5
+  }
+}
+```
