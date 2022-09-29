@@ -1,4 +1,6 @@
-# 簡單心得
+# TypeScript  簡單心得
+
+[TypeScript Tutorial](https://www.typescripttutorial.net/)
 
 ## 建立 tsconfig
 [tsconfig 說明](https://zhongsp.gitbooks.io/typescript-handbook/content/doc/handbook/tsconfig.json.html)
@@ -49,4 +51,72 @@ function getProduct(id) : Product{
     price: 99.5
   }
 }
+```
+## TypeScript 型別的目的
+* 編譯時期就能發現程式碼的錯誤
+* 讓你了解你的變數是什麼型別
+
+## HTMLHeadingElement type
+* 使用 qerySelector 取得的元素型別為 HTMLHeadingElement
+```
+const headingTag = document.querySelector('h1');
+```
+
+## Typescript annotation 型別註解、型別註記
+
+### 變數宣告方式
+
+```
+let counter: number;
+counter = 1;
+counter = 'Hello'; // compile error 
+
+// 可以同時宣告型別和初始值
+let counter: number = 1;
+```
+### primitive type 原始型別的宣告方式
+
+```
+let name: string = 'John';
+let age: number = 25;
+let active: boolean = true;
+```
+
+## Type annotation examples
+
+### Arrays
+
+```
+let arrayName: type[];
+let names: string[] = ['John', 'Jane', 'Peter', 'David', 'Mary'];
+let numbers: number[] = [1, 2, 3];
+```
+
+### Objects
+
+```
+let person: {
+   name: string;
+   age: number
+};
+
+person = {
+   name: 'John',
+   age: 25
+};
+```
+
+### Function arguments & return types
+
+```
+let greeting : (name: string) => string;
+greeting = function (name: string) {
+    return `Hi ${name}`;
+};
+
+// 這個會報錯的原因是因為沒有回傳字串回去
+greeting = function () {
+    console.log('Hello');
+};
+
 ```
