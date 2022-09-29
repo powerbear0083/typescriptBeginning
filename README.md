@@ -63,6 +63,8 @@ const headingTag = document.querySelector('h1');
 ```
 
 ## Typescript annotation 型別註解、型別註記
+typescript 使用型別註記 ( type annotations )的方式，來明確的標示 variables、function、object 的型別
+
 
 ### 變數宣告方式
 
@@ -120,3 +122,54 @@ greeting = function () {
 };
 
 ```
+
+## Type inference 型別推論
+型別推論是指，當你的變數沒有明確的指名是那種型別的時候，typescript 會自動推論出變數的型別
+
+```
+let counter = 0;
+// 上面寫法等同下面寫法
+let counter: number = 0;
+
+// 同樣的如果 function 的預設參數有給預設值，typescript 也會自動推論出型別
+function setCounter(max=100) {
+    // ...
+}
+
+// 如果 function 沒有宣告回傳值，這個範例 typescript 也會自動推論出型別
+function increment(counter: number) {
+    return counter++;
+}
+
+// 這個範例等同上個範例
+function increment(counter: number) : number {
+    return counter++;
+}
+```
+
+## 通用型別
+typescript 會把下面這種陣列推論為 number[]
+```
+let items = [1, 2, 3, null];
+```
+如果陣列有數字和字串， 會陣列推論為 (number | string)[]
+```
+let items = [0, 1, null, 'Hi']
+```
+
+## Contextual typing 依據上下文推論型別
+
+這個案例 typescript 會知道 event 是 MouseEvent
+```
+document.addEventListener('click', function (event) {
+    console.log(event.button); // 
+});
+```
+如果把 click 換成 scroll 會報錯，因為 scroll 事件沒有 button 屬性
+```
+document.addEventListener('scroll', function (event) {
+    console.log(event.button); // 
+});
+```
+
+## Type inference (型別推論) vs. Type annotations (型別註記)
