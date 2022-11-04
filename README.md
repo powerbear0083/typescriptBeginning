@@ -8,6 +8,8 @@
 tsc --init
 ```
 
+---
+
 ## tsc compiler 出現錯誤
 
 [TypeScript 新手指南](https://willh.gitbook.io/typescript-tutorial/) 看這個教學，在使用 tsc 這個名命出現以下錯誤
@@ -29,38 +31,25 @@ error TS6053: File 'app.ts' not found.
 2. command line 切換到該資料夾
 3. 執行 tsc app.ts 即可
 
+---
 
+## TS 底下的型別
+分為兩種
+* 原始型別 ( Primitive types )
+* 物件型別 ( Object types )
 
-## 使用 interface 定義有回傳值的 function 型別
-
-* 定義 function getProduct 的型別
-```
-interface Product{
-    id: number,
-    name: string,
-    price: number
-};
-```
-
-* 指定 getProduct 的型別
-```
-function getProduct(id) : Product{
-  return {
-    id: id,
-    name: `Awesome Gadget ${id}`,
-    price: 99.5
-  }
-}
-```
-## TypeScript 型別的目的
+### TypeScript 型別的目的
 * 編譯時期就能發現程式碼的錯誤
-* 讓你了解你的變數是什麼型別
+* 讓你更了解變數和值得關連
 
-## HTMLHeadingElement type
+
+### HTMLHeadingElement type
 * 使用 qerySelector 取得的元素型別為 HTMLHeadingElement
 ```
 const headingTag = document.querySelector('h1');
 ```
+
+---
 
 ## Typescript annotation 型別註解、型別註記
 typescript 使用型別註記 ( type annotations )的方式，來明確的標示 variables、function、object 的型別
@@ -110,6 +99,7 @@ person = {
 
 ### Function arguments & return types
 
+#### Function expression example 函式陳述式
 ```
 let greeting : (name: string) => string;
 greeting = function (name: string) {
@@ -121,6 +111,37 @@ greeting = function () {
     console.log('Hello');
 };
 
+```
+
+#### Function declaration  example 函式運算式
+也可以使用下列的方式定義 function declaration 的回傳方式
+```
+function add(x: number, y: number): number {
+  return x + y;
+}
+
+```
+
+#### 使用 interface 定義有回傳值的 function 型別
+* 這樣的寫法跟 Net 的 interface 類似，先定義 method ，然後再實作方法
+* 定義 function getProduct 的型別
+```
+interface Product{
+    id: number,
+    name: string,
+    price: number
+};
+```
+
+* 指定 getProduct 的型別
+```
+function getProduct(id) : Product{
+  return {
+    id: id,
+    name: `Awesome Gadget ${id}`,
+    price: 99.5
+  }
+}
 ```
 
 ## Type inference 型別推論
@@ -147,7 +168,7 @@ function increment(counter: number) : number {
 }
 ```
 
-## 通用型別
+### 通用型別
 typescript 會把下面這種陣列推論為 number[]
 ```
 let items = [1, 2, 3, null];
@@ -157,7 +178,7 @@ let items = [1, 2, 3, null];
 let items = [0, 1, null, 'Hi']
 ```
 
-## Contextual typing 依據上下文推論型別
+### Contextual typing 依據上下文推論型別
 
 這個案例 typescript 會知道 event 是 MouseEvent
 ```
@@ -172,4 +193,6 @@ document.addEventListener('scroll', function (event) {
 });
 ```
 
-## Type inference (型別推論) vs. Type annotations (型別註記)
+### Type inference (型別推論) vs. Type annotations (型別註記)
+* Type inference TS 自己推斷 變數、陣列、function 是什麼型別
+* Type annotations RD 明確告知 TS 是什麼型別
