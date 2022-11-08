@@ -17,3 +17,10 @@ greeting = function () {
     return 'Hello';
 };
 
+
+let vacant: {} = {};
+
+console.log(vacant.toString());
+
+let skills: string[];
+skills = ['Problem Sovling','Software Design','Programming'];

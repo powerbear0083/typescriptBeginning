@@ -10,3 +10,9 @@ greeting = function () {
     console.log('Hello');
     return 'Hello';
 };
+var vacant = {};
+console.log(vacant.toString());
+var skills;
+skills = ['Problem Sovling', 'Software Design', 'Programming'];
+// skills.push(100);
+console.log(typeof (skills));

@@ -196,3 +196,141 @@ document.addEventListener('scroll', function (event) {
 ### Type inference (型別推論) vs. Type annotations (型別註記)
 * Type inference TS 自己推斷 變數、陣列、function 是什麼型別
 * Type annotations RD 明確告知 TS 是什麼型別
+
+---
+
+## TypeScript Number
+* 在 TS 中 Number 有可能是兩種數值，浮點數  ( floating-point values ) 或 big intergers
+
+### 數字宣告方式
+```
+let price: number;
+```
+
+### Decimal numbers 十進制
+```
+let counter: number = 0;
+let x: number = 100;
+let y: number = 200;
+```
+
+### Binary  numbers 二進制
+```
+let bin = 0b100;
+let anotherBin: number = 0B010;
+```
+
+### Octal Numbers 八進制
+```
+let octal: number = 0o10;
+```
+
+
+### Hexadecimal numbers 十六進制
+```
+let hexadecimal: number = 0XA;
+```
+
+### Big Integers 大整數
+```
+let big: bigint = 9007199254740991n;
+```
+---
+## TypeScript String
+
+### String 定義方式
+```
+let firstName: string = 'John';
+let title: string = "Web Developer";
+```
+---
+
+## TypeScript Boolean
+### Boolean 定義方式
+```
+let pending: boolean;
+pending = true;
+```
+---
+
+## TypeScript object Type
+在 TS 中物件型別，就不屬於原始 (primitive types) 型別 
+
+### primitive types
+* number
+* bigint
+* string
+* boolean
+* null
+* undefined
+* symbol
+
+### 物件型別宣告
+```
+// example 1
+let employee: object;
+
+employee = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 25,
+    jobTitle: 'Web Developer'
+};
+
+// example 2
+let employee: {
+    firstName: string;
+    lastName: string;
+    age: number;
+    jobTitle: string;
+};
+employee = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 25,
+    jobTitle: 'Web Developer'
+};
+
+// example 3
+let employee: {
+    firstName: string;
+    lastName: string;
+    age: number;
+    jobTitle: string;
+} = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 25,
+    jobTitle: 'Web Developer'
+};
+
+// 讀取不存在的 property 在 TS 中會報錯
+// 在 JS 會回傳 undefined
+console.log(employee.hireDate);
+```
+
+### object vs. Object 大小寫物件的差別
+* object 表示為 non-primitive values
+* Object 表示為 functionality of all objects
+  * 表示 Object 有 toString() and valueOf() 可以存取
+
+### The empty type {}
+
+```
+let vacant: {};
+vacant.firstName = 'John'; // ts 會報錯
+
+```
+
+---
+
+## TypeScript array type
+
+### 基本宣告
+
+#### 宣告回資料型別的 Array
+```
+let skills: string[];
+skills = ['Problem Sovling','Software Design','Programming'];
+skills.push(100); // ts 會報錯， Argument of type 'number' is not assignable to parameter of type 'string'.
+```
