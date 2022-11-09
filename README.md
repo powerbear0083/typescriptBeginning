@@ -371,7 +371,28 @@ skills.push(100); // ts 會報錯， Argument of type 'number' is not assignable
 
 * 陣列多種型別宣告
   
-  ```
+```
   let scores : (string | number)[] = ['Programming', 5, 'Software Design', 4];
+
 scores = ['Programming', 5, 'Software Design', 4];
-  ```
+```
+
+## TypeScript Tuple 元組（Tuple） 型別
+
+* 元組（Tuple）合併了不同型別的物件
+* 用法類似 array 但是要多考慮一些額外的因素
+* 元祖的元素數量是固定的
+* 元祖的型別是已知的，但是不必相同
+
+### Tuple example
+
+```
+let skill: [string, number] = ['Programming', 5];
+```
+
+* 值得順序對 Tuple 來說很重要，輕易改變順序的話會報錯
+
+```
+let skill: [string, number];
+skill = [5, 'Programming']; // error TS2322: Type 'string' is not assignable to type 'number'.
+```
