@@ -24,3 +24,5 @@ console.log(vacant.toString());
 
 let skills: string[];
 skills = ['Problem Sovling','Software Design','Programming'];
+
+let scores : (string | number)[] = ['Programming', 5, 'Software Design', 4];
