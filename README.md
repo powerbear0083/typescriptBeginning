@@ -396,3 +396,54 @@ let skill: [string, number] = ['Programming', 5];
 let skill: [string, number];
 skill = [5, 'Programming']; // error TS2322: Type 'string' is not assignable to type 'number'.
 ```
+
+### Optional Tuple Elements
+
+* 使用 ? 運算子來表示，是否為選填值
+
+```
+let bgColor, headerColor: [number, number, number, number?];
+bgColor = [0, 255, 255, 0.5];
+headerColor = [0, 255, 255];
+```
+
+## TypeScript Enum
+
+* 列舉的值都是常數
+
+
+### TypeScript enum type example
+
+```
+enum Month {
+    Jan,
+    Feb,
+    Mar,
+    Apr,
+    May,
+    Jun,
+    Jul,
+    Aug,
+    Sep,
+    Oct,
+    Nov,
+    Dec
+};
+
+//  使用方式
+
+function isItSummer(month: Month) {
+    let isSummer: boolean;
+    switch (month) {
+        case Month.Jun:
+        case Month.Jul:
+        case Month.Aug:
+            isSummer = true;
+            break;
+        default:
+            isSummer = false;
+            break;
+    }
+    return isSummer;
+}
+```
