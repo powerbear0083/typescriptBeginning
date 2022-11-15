@@ -14,5 +14,9 @@ var vacant = {};
 console.log(vacant.toString());
 var skills;
 skills = ['Problem Sovling', 'Software Design', 'Programming'];
-// skills.push(100);
-console.log(typeof (skills));
+var scores = ['Programming', 5, 'Software Design', 4];
+var skill = ['Programming', 5];
+var result;
+result = 10.123;
+console.log(result.toFixed());
+result.willExist(); //

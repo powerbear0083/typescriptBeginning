@@ -28,3 +28,6 @@ skills = ['Problem Sovling','Software Design','Programming'];
 let scores : (string | number)[] = ['Programming', 5, 'Software Design', 4];
 
 let skill: [string, number] = ['Programming', 5];
+
+
+let useless: void = null;

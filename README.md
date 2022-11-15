@@ -407,7 +407,7 @@ bgColor = [0, 255, 255, 0.5];
 headerColor = [0, 255, 255];
 ```
 
-## TypeScript Enum
+## TypeScript Enum type
 
 * 列舉的值都是常數
 
@@ -446,4 +446,46 @@ function isItSummer(month: Month) {
     }
     return isSummer;
 }
+```
+
+## TypeScript any Type
+
+* 使用 Type 型別允許你在 compile time 不需要檢查型別
+
+### TypeScript any vs. object
+
+* 這樣寫不會報錯
+  
+```
+let result: any;
+result = 10.123;
+console.log(result.toFixed());
+result.willExist(); //
+```
+
+* 這樣寫會報錯
+  
+```
+let result: object;
+result = 10.123;
+result.toFixed();
+```
+
+
+## TypeScript void Type
+
+* void type 跟 any type 有點像
+* 通常用在沒有 return 任何值得 funciton
+
+```
+function log(message): void {
+    console.log(messsage);
+}
+```
+
+* 使用 void 的好處：可以不用讀完整個 function 就可以知道 function 沒有回傳任何值
+* 當宣告一個變數為 undefined 的時候，可以使用 void
+
+```
+let useless: void = undefined;
 ```
