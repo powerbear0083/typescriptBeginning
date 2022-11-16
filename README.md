@@ -489,3 +489,52 @@ function log(message): void {
 ```
 let useless: void = undefined;
 ```
+
+## TypeScript never Type
+
+* never Type 表示不包含任何值
+* never type 也不可以 assign 值
+* 通常用來讓 function 拋出 error 用
+
+```
+function raiseError(message: string): never {
+    throw new Error(message);
+}
+```
+
+* TS 會自己判斷為 never type
+```
+function reject() { 
+   return raiseError('Rejected');
+}
+```
+
+* 以下範例，當 fn 沒有 return 值回去， fn 會報錯
+
+```
+function fn(a: string | number): boolean {
+  if (typeof a === "string") {
+    return true;
+  } else if (typeof a === "number") {
+    return false;
+  }   
+}
+```
+
+* 改成下面寫法就不會報錯
+
+```
+function fn(a: string | number): boolean {
+  if (typeof a === "string") {
+    return true;
+  } else if (typeof a === "number") {
+    return false;
+  }  
+  // make the function valid
+  return neverOccur();
+}
+
+let neverOccur = () => {
+   throw new Error('Never!');
+} 
+```
