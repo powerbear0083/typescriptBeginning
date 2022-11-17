@@ -538,3 +538,31 @@ let neverOccur = () => {
    throw new Error('Never!');
 } 
 ```
+
+## TypeScript union Type
+
+* union type 讓你的變數儲存一至多個型別
+* union type 允許你連結多個型別
+
+```
+let result: number | string;
+result = 10; // OK
+result = 'Hi'; // also OK
+result = false; // a boolean value, not OK
+```
+
+
+## TypeScript Type Aliases 型別別名
+
+* type aliases 允許創造一個新的變數名稱，並將一個新變數的型別指派給已存在的型別
+
+```
+type chars = string;
+let message: chars; // same as string type
+
+type alphanumeric = string | number;
+let input: alphanumeric;
+input = 100; // valid
+input = 'Hi'; // valid
+input = false; // Compiler error
+```

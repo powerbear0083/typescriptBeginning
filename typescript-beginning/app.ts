@@ -33,15 +33,27 @@ let skill: [string, number] = ['Programming', 5];
 let useless: void = null;
 
 function fn(a: string | number): boolean {
-    if (typeof a === "string") {
-      return true;
-    } else if (typeof a === "number") {
-      return false;
-    }  
-    // make the function valid
-    return neverOccur();
-  }
-  
-  let neverOccur = () => {
-     throw new Error('Never!');
-  } 
+if (typeof a === "string") {
+    return true;
+} else if (typeof a === "number") {
+    return false;
+}  
+// make the function valid
+return neverOccur();
+}
+
+let neverOccur = () => {
+    throw new Error('Never!');
+} 
+
+function add(a: any, b: any) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.concat(b);
+    }
+    throw new Error('Parameters must be numbers or strings');
+}
+
+add(true, false);
