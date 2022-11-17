@@ -566,3 +566,37 @@ input = 100; // valid
 input = 'Hi'; // valid
 input = false; // Compiler error
 ```
+
+## TypeScript String Literal Types
+
+* string literal types 允許將字串定義成 types
+* click 重新 assign 'click' 是有效的
+* 但是重新 assing 成變得名字會報錯
+```
+let click: 'click';
+
+click = 'click'; // valid
+click = 'dblclick'; // compiler error
+
+```
+
+* 和 union type 一起運用，會有很好的搭配效果
+  
+```
+let mouseEvent: 'click' | 'dblclick' | 'mouseup' | 'mousedown';
+mouseEvent = 'click'; // valid
+mouseEvent = 'dblclick'; // valid
+mouseEvent = 'mouseup'; // valid
+mouseEvent = 'mousedown'; // valid
+mouseEvent = 'mouseover'; // compiler error
+
+type MouseEvent: 'click' | 'dblclick' | 'mouseup' | 'mousedown';
+let mouseEvent: MouseEvent;
+mouseEvent = 'click'; // valid
+mouseEvent = 'dblclick'; // valid
+mouseEvent = 'mouseup'; // valid
+mouseEvent = 'mousedown'; // valid
+mouseEvent = 'mouseover'; // compiler error
+
+let anotherEvent: MouseEvent;
+```
