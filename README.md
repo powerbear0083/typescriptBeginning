@@ -600,3 +600,26 @@ mouseEvent = 'mouseover'; // compiler error
 
 let anotherEvent: MouseEvent;
 ```
+
+## TypeScript Functions
+
+* 和 JS 不同的地方，JS function 中的傳入參數和回傳值都要定義型別
+
+### example
+
+* 下面這個範例表示 add 傳入的兩個參數的型別都是 number
+* add 這個 method 的回傳值，被定義為 number
+
+```
+function add(a: number, b: number): number {
+    return a + b;
+}
+```
+
+* 如果 function 不回傳任何值可以使用 void
+
+```
+function echo(message: string): void {
+    console.log(message.toUpperCase());
+}
+```
