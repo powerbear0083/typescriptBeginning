@@ -57,3 +57,13 @@ function add(a: any, b: any) {
 }
 
 add(true, false);
+
+const add2 = (x: number, y: number): number => {
+    return x + y
+}
+
+let add3: (x: number, y: number) => number;
+
+add3 = function (x: string, y: string): number {
+    return x.concat(y).length;
+};

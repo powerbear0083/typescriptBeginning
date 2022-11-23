@@ -603,7 +603,7 @@ let anotherEvent: MouseEvent;
 
 ## TypeScript Functions
 
-* 和 JS 不同的地方，JS function 中的傳入參數和回傳值都要定義型別
+* 和 JS 不同的地方，TS function 中的傳入參數和回傳值都要定義型別
 
 ### example
 
@@ -612,7 +612,7 @@ let anotherEvent: MouseEvent;
 
 ```
 function add(a: number, b: number): number {
-    return a + b;
+  return a + b;
 }
 ```
 
@@ -621,5 +621,34 @@ function add(a: number, b: number): number {
 ```
 function echo(message: string): void {
     console.log(message.toUpperCase());
+}
+```
+
+
+## TypeScript Function Types
+
+* function 分成兩個部分，一個是參數 (parameter) 型別，一個是回傳 (return) 型別
+
+
+* 下面的範例 function 中的參數型別都是 number
+* function 的回傳參數型別為 number，可以用  => 來表示型別
+```
+// 先定義 function 型別
+let add: (x: number, y: number) => number;
+
+// 再寫 function
+add = function (x: number, y: number) {
+  return x + y;
+};
+
+// 也可以這樣寫
+let add: (a: number, b: number) => number =
+    function (x: number, y: number) {
+        return x + y;
+    };
+
+// 箭頭函式範例
+const add2 = (x: number, y: number): number => {
+  return x + y
 }
 ```
