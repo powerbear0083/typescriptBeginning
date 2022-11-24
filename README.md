@@ -624,7 +624,6 @@ function echo(message: string): void {
 }
 ```
 
-
 ## TypeScript Function Types
 
 * function 分成兩個部分，一個是參數 (parameter) 型別，一個是回傳 (return) 型別
@@ -650,5 +649,21 @@ let add: (a: number, b: number) => number =
 // 箭頭函式範例
 const add2 = (x: number, y: number): number => {
   return x + y
+}
+```
+
+## TypeScript Optional Parameters
+
+* TS 中選填參數用法
+* 使用 ? 來表示選填參數
+
+```
+function multiply(a: number, b: number, c?: number): number {
+
+  // 如果參數是選填的話，要有判斷防呆的邏輯，不然會報錯
+  if (typeof c !== 'undefined') {
+    return a * b * c;
+  }
+  return a * b;
 }
 ```

@@ -67,3 +67,11 @@ let add3: (x: number, y: number) => number;
 add3 = function (x: string, y: string): number {
     return x.concat(y).length;
 };
+
+function multiply(a: number, b: number, c?: number): number {
+
+    if (typeof c !== 'undefined') {
+        return a * b * c;
+    }
+    return a * b;
+}
