@@ -75,3 +75,27 @@ function multiply(a: number, b: number, c?: number): number {
     }
     return a * b;
 }
+
+let promotion: (price: number, discount: number) => number;
+
+promotion = function(price = 0, discount = 0.5) {
+    return price * discount
+}
+
+
+function applyDiscount(price: number, discount?: number): number {
+    let result = 0
+    if(discount) {
+        result = price * (1 - discount);
+    }
+    return result
+}
+
+let applyDiscount2: (price: number, discount?: number) => number;
+applyDiscount2 = function applyDiscount(price = 0, discount = 0.5): number {
+  let result = 0
+  if(discount) {
+      result = price * (1 - discount);
+  }
+  return result
+}

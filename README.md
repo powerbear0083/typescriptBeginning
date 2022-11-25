@@ -642,9 +642,9 @@ add = function (x: number, y: number) {
 
 // 也可以這樣寫
 let add: (a: number, b: number) => number =
-    function (x: number, y: number) {
-        return x + y;
-    };
+  function (x: number, y: number) {
+      return x + y;
+  };
 
 // 箭頭函式範例
 const add2 = (x: number, y: number): number => {
@@ -665,5 +665,56 @@ function multiply(a: number, b: number, c?: number): number {
     return a * b * c;
   }
   return a * b;
+}
+```
+
+## TypeScript Default Parameters
+
+* TS 預設參數寫法
+
+```
+function applyDiscount(price: number, discount: number = 0.05): number {
+  return price * (1 - discount);
+}
+console.log(applyDiscount(100)); // 95
+```
+
+* 這種預設參數的寫法會報錯
+  
+```
+let promotion: (price: number, discount: number = 0.05) => number;
+
+// 這樣寫就不會報錯
+let promotion: (price: number, discount: number) => number;
+
+promotion = function(price = 0, discount = 0.5) {
+    return price * discount
+}
+
+```
+
+###　Default parameters and Optional parameters
+
+* example 1
+```
+function applyDiscount(price: number, discount?: number): number {
+  let result = 0
+  if(discount) {
+      result = price * (1 - discount);
+  }
+  return result
+}
+```
+
+* example 2
+
+```
+let applyDiscount2: (price: number, discount?: number) => number;
+applyDiscount2 = function applyDiscount(price = 0, discount = 0.5): number {
+  let result = 0
+  if(discount) {
+      result = price * (1 - discount);
+  }
+  return result
 }
 ```
