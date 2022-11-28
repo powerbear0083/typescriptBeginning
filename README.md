@@ -693,7 +693,7 @@ promotion = function(price = 0, discount = 0.5) {
 
 ```
 
-###　Default parameters and Optional parameters
+##　Default parameters and Optional parameters
 
 * example 1
 ```
@@ -717,4 +717,26 @@ applyDiscount2 = function applyDiscount(price = 0, discount = 0.5): number {
   }
   return result
 }
+```
+
+## TypeScript Rest Parameters
+
+### TypeScript rest parameter 使用規則
+
+* 一個 function 只能有一個 rest parameter
+* rest parameter 必須在 function 的最後一個
+* rest parameter 是一個 array type
+
+#### example
+
+```
+function getTotal(...numbers: number[]): number {
+  let total = 0;
+  numbers.forEach((num) => total += num);
+  return total;
+}
+
+console.log(getTotal()); // 0
+console.log(getTotal(10, 20)); // 30
+console.log(getTotal(10, 20, 30)); // 60
 ```
