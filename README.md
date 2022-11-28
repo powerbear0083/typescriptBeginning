@@ -740,3 +740,69 @@ console.log(getTotal()); // 0
 console.log(getTotal(10, 20)); // 30
 console.log(getTotal(10, 20, 30)); // 60
 ```
+
+## TypeScript Function Overloadings 函式多載或方法多載
+
+* TS 的 overloading 和 C# and Java 不同
+* 在 TypeScript 中，函數重載允許您在函數的參數類型和結果類型之間建立關係。
+
+### example
+
+* 寫一個共用 funtion， 可以 return  a + b 的 value
+* 可以利用 union type 來達到目的
+* 但是 union type 不能從參數和回傳值看出互相依賴的關係
+```
+function add(a: number | string, b: number | string): number | string {
+  if (typeof a === 'number' && typeof b === 'number') {
+    return a + b;
+  }
+
+  if (typeof a === 'string' && typeof b === 'string') {
+    return a + b;
+  }
+}
+```
+
+### improve example
+
+```
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: any, b: any): any {
+  return a + b;
+}
+
+// 和選填參數一起使用
+function sum(a: number, b: number): number;
+function sum(a: number, b: number, c: number): number;
+function sum(a: number, b: number, c?: number): number {
+    if (c) return a + b + c;
+    return a + b;
+}
+```
+
+### class example
+
+```
+class Counter {
+  private current: number = 0;
+  count(): number;
+  count(target: number): number[];
+  count(target?: number): number | number[] {
+    if (target) {
+      let values = [];
+      for (let start = this.current; start <= target; start++) {
+          values.push(start);
+      }
+      this.current = target;
+      return values;
+    }
+    return ++this.current;
+  }
+}
+
+let counter = new Counter();
+
+console.log(counter.count()); // return a number
+console.log(counter.count(20)); // return an array
+```
