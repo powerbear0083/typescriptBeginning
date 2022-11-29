@@ -806,3 +806,69 @@ let counter = new Counter();
 console.log(counter.count()); // return a number
 console.log(counter.count(20)); // return an array
 ```
+## TypeScript Class
+
+## ES5 Class example
+
+```
+// 建立一個 Person class
+function Person(ssn, firstName, lastName) {
+  this.ssn = ssn;
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+// 使用 prototype 定義一個 method
+Person.prototype.getFullName = function () {
+  return `${this.firstName} ${this.lastName}`;
+}
+
+// 調用 new Person
+let person = new Person('171-28-0926','John','Doe');
+console.log(person.getFullName());
+```
+
+## ES6 Class example
+
+```
+class Person {
+  ssn;
+  firstName;
+  lastName;
+
+  constructor(ssn, firstName, lastName) {
+    this.ssn = ssn;
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  getFullName() {
+      return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+let person = new Person('171-28-0926','John','Doe');
+console.log(person.getFullName());
+```
+
+## TS Class example
+
+* class 底下的  property, constructor, method 都需要定義型別
+  
+```
+class Person {
+  ssn: string;
+  firstName: string;
+  lastName: string;
+
+  constructor(ssn: string, firstName: string, lastName: string) {
+      this.ssn = ssn;
+      this.firstName = firstName;
+      this.lastName = lastName;
+  }
+
+  getFullName(): string {
+      return `${this.firstName} ${this.lastName}`;
+  }
+}
+```
