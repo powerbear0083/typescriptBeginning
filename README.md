@@ -808,7 +808,7 @@ console.log(counter.count(20)); // return an array
 ```
 ## TypeScript Class
 
-## ES5 Class example
+### ES5 Class example
 
 ```
 // 建立一個 Person class
@@ -828,7 +828,7 @@ let person = new Person('171-28-0926','John','Doe');
 console.log(person.getFullName());
 ```
 
-## ES6 Class example
+### ES6 Class example
 
 ```
 class Person {
@@ -851,7 +851,7 @@ let person = new Person('171-28-0926','John','Doe');
 console.log(person.getFullName());
 ```
 
-## TS Class example
+### TS Class example
 
 * class 底下的  property, constructor, method 都需要定義型別
   
@@ -870,5 +870,87 @@ class Person {
   getFullName(): string {
       return `${this.firstName} ${this.lastName}`;
   }
+}
+```
+
+## TypeScript Access Modifiers
+
+TS 中的 Class 有三種方式可以修改訪問 properties and methods 
+
+* private
+* protected
+* public
+
+https://www.typescripttutorial.net/typescript-tutorial/typescript-access-modifiers/
+
+### The private modifier
+
+有 private modifier 的 property 和 method 只能在同一個 class 內被 access
+底下範例 constructor 可以 access private ssn
+如果直接 access ssn 會報錯
+
+```
+class Person {
+  private ssn: string;
+  private firstName: string;
+  private lastName: string;
+
+  constructor(ssn: string, firstName: string, lastName: string) {
+    this.ssn = ssn;
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  getFullName(): string {
+    return `${this.firstName} ${this.lastName}`; 
+  }
+}
+
+let person = new Person('153-07-3130', 'John', 'Doe');
+console.log(person.ssn); // compile error
+```
+
+### The public modifier
+
+```
+class Person {
+
+  // 這個寫法跟下面的寫法，效果相同
+  public getFullName(): string {
+    return `${this.firstName} ${this.lastName}`; 
+  }
+
+
+  getFullName(): string {
+    return `${this.firstName} ${this.lastName}`; 
+  }
+}
+```
+
+### The protected modifier
+
+protected modifier 允許 properties and methods 在同一個 class 被 access
+但是不能被 subclass access 
+當一個 class(child class) 繼承自另一個 class (parent class)，如果 subclass 
+試圖 access parent class 的 protected properties or methods ，這時候 TS 就會報錯
+
+```
+class Person {
+
+  protected ssn: string;
+  
+  // other code
+}
+
+class Person {
+    constructor(protected ssn: string, private firstName: string, private lastName: string) {
+        this.ssn = ssn;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    getFullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
 }
 ```
