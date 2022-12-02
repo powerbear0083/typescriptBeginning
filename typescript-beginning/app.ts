@@ -118,3 +118,13 @@ class Person {
 
 let person = new Person('153-07-3130', 'John', 'Doe');
 console.log(person.ssn); 
+
+class Person2 {
+    readonly birthDate: Date;
+
+    constructor(birthDate: Date) {
+        this.birthDate = birthDate;
+    }
+}
+let person2 = new Person2(new Date(1990, 12, 25));
+person2.birthDate = new Date(1991, 12, 25); 

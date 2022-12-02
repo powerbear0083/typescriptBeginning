@@ -954,3 +954,33 @@ class Person {
     }
 }
 ```
+
+## TypeScript readonly
+
+TS 提供 readonly modifier 允許你宣告 class 中不可變的 properties 
+宣告為 readonly 的 property 會作用在兩個地方\
+
+* 宣告 property 指定為 readonly
+* 同個 class 底下的 constructor
+
+```
+class Person {
+  readonly birthDate: Date;
+
+  constructor(birthDate: Date) {
+    this.birthDate = birthDate;
+  }
+}
+
+// Compile error
+let person = new Person(new Date(1990, 12, 25));
+person.birthDate = new Date(1991, 12, 25);
+```
+### readonly 另一個宣告方式
+```
+class Person {
+    constructor(readonly birthDate: Date) {
+        this.birthDate = birthDate;
+    }
+}
+```
