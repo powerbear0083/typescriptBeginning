@@ -984,3 +984,53 @@ class Person {
     }
 }
 ```
+
+## TypeScript Inheritance
+
+繼承 (inheritance) 是指 child class 繼承 parent class 的 properties and methods
+
+```
+class Person {
+  constructor(private firstName: string, private lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+  getFullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
+  describe(): string {
+    return `This is ${this.firstName} ${this.lastName}.`;
+  }
+}
+```
+
+Employee 使用 extends Person
+使用 super 調用 parent class 的 constructor
+透過繼承就可以使用 parent class 的 method
+```
+class Employee extends Person {
+  private jobTitle: string
+  constructor(
+    firstName: string,
+    lastName: string,
+    jobTitle: string) {
+    
+    // call the constructor of the Person class:
+    super(firstName, lastName);
+  }
+
+  // 如果你想複寫 parent class 的 describe
+  // 在自己的 class 底下，重新寫一個 describe 
+
+  describe(): string {
+      // 可以透過 super 的方式調用 parent class 的 describe
+      return super.describe() + `I'm a ${this.jobTitle}.`;
+  }
+}
+
+let employee = new Employee('John','Doe','Front-end Developer');
+let employee = new Employee('John', 'Doe', 'Web Developer');
+
+console.log(employee.getFullName());
+console.log(employee.describe());
+```
