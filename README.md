@@ -1083,3 +1083,63 @@ let jane = new Employee('Jane', 'Doe', 'Back-end Developer');
 
 console.log(Employee.getHeadcount);
 ```
+
+## TypeScript Abstract Classes 抽象類別
+
+抽象類通常用來定義常用的行為，一般的 class 不一樣的地方，是  abstract class 不能直接 new
+通常，抽象類型會包含一個或多個抽象 methods
+
+抽象　methods 通常部會不含實作 (implementation)，只會定義 method 名稱在 class 內
+抽象 methods 必須在 new 的  class 去實作 method
+
+```
+abstract class Employee {
+    constructor(private firstName: string, private lastName: string) {
+    }
+    abstract getSalary(): number
+    get fullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+    compensationStatement(): string {
+        return `${this.fullName} makes ${this.getSalary()} a month.`;
+    }
+}
+```
+
+Employee class 是一個抽象類別，不能直接 new
+
+Employee class 要這樣使用才行
+且 getSalary 在 Employee 是一個抽象 method，需要在這裡實作 getSalary 才能執行
+
+```
+class FullTimeEmployee extends Employee {
+    constructor(firstName: string, lastName: string, private salary: number) {
+        super(firstName, lastName);
+    }
+    getSalary(): number {
+        return this.salary;
+    }
+}
+```
+
+另一個範例
+
+```
+class Contractor extends Employee {
+    constructor(firstName: string, lastName: string, private rate: number, private hours: number) {
+        super(firstName, lastName);
+    }
+    getSalary(): number {
+        return this.rate * this.hours;
+    }
+}
+
+let john = new FullTimeEmployee('John', 'Doe', 12000);
+let jane = new Contractor('Jane', 'Doe', 100, 160);
+
+console.log(john.compensationStatement());
+console.log(jane.compensationStatement());
+
+John Doe makes 12000 a month.
+Jane Doe makes 16000 a month.
+```
