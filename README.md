@@ -1143,3 +1143,148 @@ console.log(jane.compensationStatement());
 John Doe makes 12000 a month.
 Jane Doe makes 16000 a month.
 ```
+
+## TypeScript Interface
+
+* interface 定義程式碼接口
+
+* 下面這種傳入參數型的寫法比較難閱讀
+```
+function getFullName(person: {
+    firstName: string;
+    lastName: string
+}) {
+    return `${person.firstName} ${person.lastName}`;
+}
+
+let person = {
+    firstName: 'John',
+    lastName: 'Doe'
+};
+
+console.log(getFullName(person));
+```
+
+* 可以改成使用 interface
+* interface 的名稱使用大駝峰命名方式 ，For example, Person, UserProfile, and FullName.
+```
+interface Person {
+  firstName: string;
+  lastName: string;
+}
+
+function getFullName(person: Person) {
+    return `${person.firstName} ${person.lastName}`;
+}
+
+let john = {
+    firstName: 'John',
+    lastName: 'Doe'
+};
+
+console.log(getFullName(john));
+```
+
+### Optional properties 選填屬性
+
+* 使用 ? 表示為選填參數
+
+```
+interface Person {
+    firstName: string;
+    middleName?: string;
+    lastName: string;
+}
+
+```
+
+### Readonly properties
+
+* 設定 readonly 之後值無法再變動
+```
+interface Person {
+    readonly ssn: string;
+    firstName: string;
+    lastName: string;    
+}
+
+let person: Person;
+person = {
+    ssn: '171-28-0926',
+    firstName: 'John',
+    lastName: 'Doe'
+}
+```
+
+
+### Function types
+
+* 如何在 interface 中定義 function 型別
+
+#### example
+
+```
+interface StringFormat {
+    (str: string, isUpper: boolean): string
+}
+
+let format: StringFormat;
+
+format = function (str: string, isUpper: boolean) {
+    return isUpper ? str.toLocaleUpperCase() : str.toLocaleLowerCase();
+};
+
+```
+
+* function 傳入的名稱可以和 interface 不一樣 (個人覺得這樣不好)
+* 下面的例子等同上面的例子
+```
+let format: StringFormat;
+
+format = function (src: string, upper: boolean) {
+    return upper ? src.toLocaleUpperCase() : src.toLocaleLowerCase();
+};
+
+console.log(format('hi', true));
+```
+
+* 沒有傳第二個參數也可以 work
+
+```
+let lowerCase: StringFormat;
+lowerCase = function (str: string) {
+    return str.toLowerCase();
+}
+
+console.log(lowerCase('Hi', false));
+```
+
+### Class Types
+
+* 下面 interface 的範例，比較像 C# interface 的用法
+
+* 先定義好要實作的 method
+```
+interface Json {
+   toJSON(): string
+}
+```
+
+* 接著實作 method
+
+```
+class Person implements Json {
+    constructor(private firstName: string,
+        private lastName: string) {
+    }
+    toJson(): string {
+        return JSON.stringify(this);
+    }
+}
+
+let person = new Person('John', 'Doe');
+console.log(person.toJson());
+```
+
+https://www.typescripttutorial.net/typescript-tutorial/typescript-extend-interface/
+
