@@ -1286,5 +1286,50 @@ let person = new Person('John', 'Doe');
 console.log(person.toJson());
 ```
 
+## How to Extend Interfaces in TypeScript
+
+* 繼承讓你的原本的 interface 不會破壞目前的 interface
+
+### 一開始的 interface
+
+```
+interface Mailable {
+    send(email: string): boolean
+    queue(email: string): boolean
+}
+```
+
+### 如果要新增一個 method 可以使用 extends
+* 這樣就不會破壞原本的 interface
+* FutureMailable 繼承 Mailable ，FutureMailable 就會包含自己原本的 method 和 Mailable 的 method
+
+```
+interface FutureMailable extends Mailable {
+    later(email: string, after: number): boolean
+}
+```
+* 之後實際的 class 在實作 FutureMailable 的 method
+  
+```
+class Mail implements FutureMailable {
+    later(email: string, after: number): boolean {
+        console.log(`Send email to ${email} in ${after} ms.`);
+        return true;
+    }
+    send(email: string): boolean {
+        console.log(`Sent email to ${email} after ${after} ms. `);
+        return true;
+    }
+    queue(email: string): boolean {
+        console.log(`Queue an email to ${email}.`);
+        return true;
+    }
+}
+```
+
+### Interfaces extending classes
+
+
+
 https://www.typescripttutorial.net/typescript-tutorial/typescript-extend-interface/
 
