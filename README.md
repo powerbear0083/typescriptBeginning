@@ -1329,6 +1329,40 @@ class Mail implements FutureMailable {
 
 ### Interfaces extending classes
 
+* interface 只可以繼承私有和受保護的 properties  和 method，公開的不行
+
+
+```
+class Control {
+    private state: boolean;
+}
+
+// StatefulControl 繼承 Control
+interface StatefulControl extends Control {
+    enable(): void
+}
+
+// Button 繼承 Control，實作 StatefulControl 的 enable 的 method
+class Button extends Control implements StatefulControl {
+    enable() { }
+}
+
+// TextBox 繼承 Control，實作 StatefulControl 的 enable 的 method
+class TextBox extends Control implements StatefulControl {
+    enable() { }
+}
+
+
+class Label extends Control { }
+
+// 沒有繼承 Control 直接實作 StatefulControl 會報錯
+// Error: cannot implement
+class Chart implements StatefulControl {
+    enable() { }
+
+}
+```
+
 
 
 https://www.typescripttutorial.net/typescript-tutorial/typescript-extend-interface/
