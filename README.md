@@ -1355,7 +1355,7 @@ class TextBox extends Control implements StatefulControl {
 
 class Label extends Control { }
 
-// 沒有繼承 Control 直接實作 StatefulControl 會報錯
+// 沒有繼承 Control 直接實作 StatefulControl 會報錯ㄇ
 // Error: cannot implement
 class Chart implements StatefulControl {
     enable() { }
@@ -1363,7 +1363,67 @@ class Chart implements StatefulControl {
 }
 ```
 
+## TypeScript Intersection Types (交集型別)
+
+* intersection Types 指建立一個新的型別並結合多個已存在的型別
+
+* 先定義三個 interface
+```
+interface BusinessPartner {
+  name: string;
+  credit: number;
+}
+
+interface Identity {
+  id: number;
+  name: string;
+}
+
+interface Contact {
+  email: string;
+  phone: string;
+}
+```
+
+* 建立 Employee 與 Customer
+```
+type Employee = Identity & Contact;
+type Customer = BusinessPartner & Contact;
+```
 
 
-https://www.typescripttutorial.net/typescript-tutorial/typescript-extend-interface/
+```
+type Employee = Identity & Contact;
 
+let e: Employee = {
+    id: 100,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '(408)-897-5684'
+};
+```
+
+```
+type Customer = BusinessPartner & Contact;
+
+let c: Customer = {
+    name: 'ABC Inc.',
+    credit: 1000000,
+    email: 'sales@abcinc.com',
+    phone: '(408)-897-5735'
+};
+```
+
+* 如果要實作 Employee 可以這樣寫
+  
+```
+type Employee = Identity & BusinessPartner & Contact;
+
+let e: Employee = {
+    id: 100,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '(408)-897-5684',
+    credit: 1000
+};
+```
