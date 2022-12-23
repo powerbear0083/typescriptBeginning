@@ -1427,3 +1427,116 @@ let e: Employee = {
     credit: 1000
 };
 ```
+
+## TypeScript Type Guards (型別保護)
+
+### 先看個範例
+* 下面這個 add method 接受兩個參數，參數分別可傳入 string or number
+
+```
+type alphanumeric = string | number;
+
+function add(a: alphanumeric, b: alphanumeric) {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.concat(b);
+    }
+
+    throw new Error('Invalid arguments. Both arguments must be either numbers or strings.');
+}
+```
+
+
+### instanceof
+
+### 另一個範例
+
+* 宣告兩個 class
+* 建立 BusinessPartner union type
+* 再建立一個 signContract method 接受一個 partner 參數型別為 BusinessPartner
+* 最後在 signContract 內部的判斷式使用 instanceof 去判斷為那種型別
+
+```
+class Customer {
+    isCreditAllowed(): boolean {
+        // ...
+        return true;
+    }
+}
+
+class Supplier {
+    isInShortList(): boolean {
+        // ...
+        return true;
+    }
+}
+
+type BusinessPartner = Customer | Supplier;
+
+function signContract(partner: BusinessPartner) : string {
+    let message: string;
+    if (partner instanceof Customer) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    }
+
+    if (partner instanceof Supplier) {
+        message = partner.isInShortList() ? 'Sign a new contract the supplier' : 'Need to evaluate further';
+    }
+
+    return message;
+}
+// 上面的範例可以改寫成這樣
+
+function signContract(partner: BusinessPartner) : string {
+    let message: string;
+    if (partner instanceof Customer) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    } else {
+        // must be Supplier
+        message = partner.isInShortList() ? 'Sign a new contract with the supplier' : 'Need to evaluate further';
+    }
+    return message;
+}
+
+```
+
+### in
+
+* 也可以使用 in operator 改寫上面的範例
+  
+```
+function signContract(partner: BusinessPartner) : string {
+    let message: string;
+    if ('isCreditAllowed' in partner) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    } else {
+        // must be Supplier
+        message = partner.isInShortList() ? 'Sign a new contract the supplier ' : 'Need to evaluate further';
+    }
+    return message;
+}
+```
+
+### User-defined Type Guards
+
+*  Type Guards 可以幫助 TS 在面對 function 的時候去推斷傳進來的參數的型別
+
+```
+function isCustomer(partner: any): partner is Customer {
+  return partner instanceof Customer;
+}
+
+function signContract(partner: BusinessPartner): string {
+    let message: string;
+    if (isCustomer(partner)) {
+        message = partner.isCreditAllowed() ? 'Sign a new contract with the customer' : 'Credit issue';
+    } else {
+        message = partner.isInShortList() ? 'Sign a new contract with the supplier' : 'Need to evaluate further';
+    }
+
+    return message;
+}
+```
