@@ -1540,3 +1540,50 @@ function signContract(partner: BusinessPartner): string {
     return message;
 }
 ```
+
+## Type Casting 型別轉換
+
+* 在 TS　中允許一個變數的型別轉換型另一個型別。
+* TS 中可以使用 as 這個 keyword  or <> 這個 operator 做型別轉換
+   
+
+### Type casting using the as keyword 
+
+```
+let input = document.querySelector('input["type="text"]');
+
+// 這個會報錯，因為 querySelector 回傳的是一個  HTML Element
+// 所以 input 的 HTMLInputElement value 不存在，因此報錯
+console.log(input.value);
+```
+
+### Resolve example
+
+* 使用 as keyword 將型別改成 HTMLInputElement，這樣就不會報錯
+```
+let input = document.querySelector('input[type="text"]') as HTMLInputElement;
+console.log(input.value);
+```
+
+### another example 1
+
+```
+let enteredText = (input as HTMLInputElement).value;
+```
+
+### another example 2
+
+```
+let el: HTMLElement;
+el = new HTMLInputElement();
+```
+
+### Type Casting using the <> operator
+
+* 可以使用  <> operator 轉換型別
+  
+```
+let input = <HTMLInputElement>document.querySelector('input[type="text"]');
+
+console.log(input.value);
+```
