@@ -1587,3 +1587,42 @@ let input = <HTMLInputElement>document.querySelector('input[type="text"]');
 
 console.log(input.value);
 ```
+
+## Type Assertions
+
+https://www.typescripttutorial.net/typescript-tutorial/type-assertions/
+
+* Type Assertions 是指 TS 在 compiler 的時候要對待某個值，指定其型別 
+* 使用 as keyword
+
+```
+expression as targetType
+```
+
+### example
+
+```
+function getNetPrice(price: number, discount: number, format: boolean): number | string {
+    let netPrice = price * (1 - discount);
+    return format ? `$${netPrice}` : netPrice;
+}
+
+// 透過 Type Assertions as 的關鍵字，執行 getNetPrice 這個 method 並將 netPrice 的型別設為 string
+let netPrice = getNetPrice(100, 0.05, true) as string;
+console.log(netPrice); // $95
+
+// 另一個範例，可以將 netPrice 的型別設為 number
+let netPrice = getNetPrice(100, 0.05, false) as number;
+console.log(netPrice); // 95
+```
+
+### 替代語法
+
+* 有些 react 的 libraies 不能使用 <> 這個語法，建議使用 as 這種語法
+```
+<targetType> value
+```
+
+```
+let netPrice = <number>getNetPrice(100, 0.05, false);
+```
