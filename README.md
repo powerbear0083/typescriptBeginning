@@ -1590,8 +1590,6 @@ console.log(input.value);
 
 ## Type Assertions
 
-https://www.typescripttutorial.net/typescript-tutorial/type-assertions/
-
 * Type Assertions 是指 TS 在 compiler 的時候要對待某個值，指定其型別 
 * 使用 as keyword
 
@@ -1625,4 +1623,76 @@ console.log(netPrice); // 95
 
 ```
 let netPrice = <number>getNetPrice(100, 0.05, false);
+```
+## TypeScript Generics 泛型
+
+https://www.typescripttutorial.net/typescript-tutorial/typescript-generics/
+* TS 的泛型讓你可以撰寫可覆用和通用的 function, class, interface
+* 在 TS 中想要撰寫可共用多種型別的 function ，可以使用泛型來撰寫
+
+
+### example 1
+
+* 寫一個會產生亂數數值的 method
+
+```
+function getRandomNumberElement(items: number[]): number {
+  let randomIndex = Math.floor(Math.random() * items.length);
+  return items[randomIndex];
+}
+
+let numbers = [1, 5, 7, 4, 2, 9];
+console.log(getRandomNumberElement(numbers));
+```
+
+* 假設有另一個需求，需要產生亂數字串
+
+```
+function getRandomStringElement(items: string[]): string {
+    let randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+let colors = ['red', 'green', 'blue'];
+console.log(getRandomStringElement(colors));
+```
+
+### generics example
+
+* 使用 T 來表示泛型型別
+* T 允許在 function 被調用的時候去捕獲型別
+* getRandomElement 這時就可以接受任何型別的資料
+
+```
+function getRandomElement<T>(items: T[]): T {
+    let randomIndex = Math.floor(Math.random() * items.length);
+    return items[randomIndex];
+}
+
+// 可以使用這種方式調用 method
+let numbers = [1, 5, 7, 4, 2, 9];
+let randomEle = getRandomElement<number>(numbers); 
+console.log(randomEle);
+
+// 也可以這用使用 method  TS 會自動轉型
+let numbers = [1, 5, 7, 4, 2, 9];
+let randomEle = getRandomElement(numbers); 
+console.log(randomEle)
+```
+
+### 多種泛型
+
+```
+function merge<U, V>(obj1: U, obj2: V) {
+    return {
+        ...obj1,
+        ...obj2
+    };
+}
+
+let result = merge(
+    { name: 'John' },
+    { jobTitle: 'Frontend Developer' }
+);
+
+console.log(result);
 ```
