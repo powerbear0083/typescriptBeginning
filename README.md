@@ -1696,3 +1696,52 @@ let result = merge(
 
 console.log(result);
 ```
+https://www.typescripttutorial.net/typescript-tutorial/typescript-generic-constraints/
+
+## TypeScript Generic Constraints 泛型約束條件
+
+### example
+
+* 泛型基本用法
+```
+function merge<U, V>(obj1: U, obj2: V) {
+  return {
+      ...obj1,
+      ...obj2
+  };
+}
+let person = merge(
+    { name: 'John' },
+    { age: 25 }
+);
+
+console.log(result); // { name: 'John', age: 25 }
+
+```
+
+* 如果 merge 這時傳入一個 object 和 number，TS 也不會報錯
+
+```
+let person = merge(
+    { name: 'John' },
+    25
+);
+
+console.log(person); // { name: 'John' }
+```
+
+* 為了讓 merge 只可以傳入 object 的資料格式，可以針對 U，V 這兩個泛型加以約束
+* 使用 extends 的關鍵字，讓 U、V 這兩個泛型只能傳入 object
+
+```
+function merge<U extends object, V extends object>(obj1: U, obj2: V) {
+    return {
+        ...obj1,
+        ...obj2
+    };
+}
+```
+
+
+### Using type parameters in generic constraints 泛型參數
+https://www.typescripttutorial.net/typescript-tutorial/typescript-generic-constraints/
