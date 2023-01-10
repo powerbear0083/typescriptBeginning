@@ -1744,4 +1744,151 @@ function merge<U extends object, V extends object>(obj1: U, obj2: V) {
 
 
 ### Using type parameters in generic constraints 泛型參數
-https://www.typescripttutorial.net/typescript-tutorial/typescript-generic-constraints/
+
+* TS 允許你宣告參數的型別，去約束要傳入的參數型別
+
+下面這個範例 prop method 接受 object 和 property name，然後回傳 property 的值
+```
+function prop<T, K>(obj: T, key: K) {
+    return obj[key];
+}
+
+// Type 'K' cannot be used to index type 'T'. 這會發生 compiler error
+```
+
+為了修正這個錯誤，可以加入一個約束條件，讓 K 確保他的 key 是 T 可以接紹的 property
+
+```
+function prop<T, K extends keyof T>(obj: T, key: K) {
+    return obj[key];
+}
+```
+
+如過傳進去的參數 name 有存在 object，這時 compiler 就不會報錯 
+
+```
+let str = prop({ name: 'John' }, 'name');
+console.log(str);
+
+// John
+
+```
+
+但是如果傳入的參數，不存在 object  中， compiler 就會報錯
+
+```
+let str = prop({ name: 'John' }, 'age');
+// Argument of type '"age"' is not assignable to parameter of type '"name"'.
+```
+
+## TypeScript Generic Classes 泛型 class
+
+https://www.typescripttutorial.net/typescript-tutorial/typescript-generic-classes/
+
+* generic class 基本寫法
+
+```
+class className<T>{
+    //... 
+}
+```
+
+* 也可以傳入多個泛型
+  
+```
+class className<K,T>{
+    //...
+}
+```
+
+* 也可以使用 generic constraints
+  
+```
+class className<T extends TypeA>{
+    //...
+}
+```
+
+### TypeScript generic classes example
+
+* 撰寫一個 stack 的 class
+* stack 是一種後進先出 (LIFO, last-in-first-out) 的儲存資料格式，意思是最先進來的元素，會最後一個出去。
+* stack 通常會有兩種操作方式
+* Push：把 element 放到 stack
+* Pop：把 element 移出 stack
+  
+```
+class Stack<T> {
+    private elements: T[] = [];
+
+    constructor(private size: number) {
+    }
+    isEmpty(): boolean {
+        return this.elements.length === 0;
+    }
+    isFull(): boolean {
+        return this.elements.length === this.size;
+    }
+    push(element: T): void {
+        if (this.elements.length === this.size) {
+            throw new Error('The stack is overflow!');
+        }
+        this.elements.push(element);
+
+    }
+    pop(): T {
+        if (this.elements.length == 0) {
+            throw new Error('The stack is empty!');
+        }
+        return this.elements.pop();
+    }
+}
+```
+
+* 建立一個新的 stack
+
+```
+let numbers = new Stack<number>(5);
+```
+
+* 這個 function 會隨機回傳兩個數值，一個高一個低
+
+```
+function randBetween(low: number, high: number): number {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+```
+
+* 現在可以使用 randBetween 這個 method 產生的值，並把他 push 到 numbers stack
+
+```
+let numbers = new Stack<number>(5);
+
+while (!numbers.isFull()) {
+    let n = randBetween(1, 10);
+    console.log(`Push ${n} into the stack.`)
+    numbers.push(n);
+}
+// Output:
+Push 3 into the stack.
+Push 2 into the stack. 
+Push 1 into the stack. 
+Push 8 into the stack. 
+Push 9 into the stack. 
+```
+
+* 把數字從 stack 移除
+  
+```
+while (!numbers.isEmpty()) {
+    let n = numbers.pop();
+    console.log(`Pop ${n} from the stack.`);
+}
+
+// Output:
+Pop 9 from the stack.
+Pop 8 from the stack.
+Pop 1 from the stack.
+Pop 2 from the stack.
+Pop 3 from the stack.
+```
