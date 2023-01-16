@@ -1892,3 +1892,116 @@ Pop 1 from the stack.
 Pop 2 from the stack.
 Pop 3 from the stack.
 ```
+
+* 也可以建立一個字串 stack 
+
+```
+let words = 'The quick brown fox jumps over the lazy dog'.split(' ');
+
+let wordStack = new Stack<string>(words.length);
+
+// push words into the stack
+words.forEach(word => wordStack.push(word));
+
+// pop words from the stack
+while (!wordStack.isEmpty()) {
+    console.log(wordStack.pop());
+}
+```
+
+## TypeScript Generic Interfaces
+
+* 泛型語法範例
+
+```
+interface interfaceName<T> {
+
+}
+```
+
+* 多個泛型語法範例
+
+```
+interface interfaceName<U,V> {
+    // ...
+}
+```
+
+
+### generic interface examples
+
+#### 使用泛型來描素物件 properties
+
+* 下面的例子兩個成員 K, V 都屬於泛型
+
+```
+interface Pair<K, V> {
+    key: K;
+    value: V;
+}
+```
+
+* 可以使用 Pair 這個 interface 來定義 key value 的型別
+  
+```
+let month: Pair<string, number> = {
+    key: 'Jan',
+    value: 1
+};
+```
+
+#### 使用泛型來描素 method
+
+* 定義一個 Collection interface 包含兩個泛型 method 一個 get 一個 remove
+
+```
+interface Collection<T> {
+    add(o: T): void;
+    remove(o: T): void;
+}
+```
+
+* 建立一個 List class 去實作 Collection 的泛型 interface
+* 之後你可以建立各種型別的 list ex number, strings
+
+```
+class List<T> implements Collection<T>{
+    private items: T[] = [];
+
+    add(o: T): void {
+        this.items.push(o);
+    }
+    remove(o: T): void {
+        let index = this.items.indexOf(o);
+        if (index > -1) {
+            this.items.splice(index, 1);
+        }
+    }
+}
+```
+
+使用 List<T> 建立一個數字 LIST
+
+```
+let list = new List<number>();
+
+for (let i = 0; i < 10; i++) {
+    list.add(i);
+}
+
+```
+
+### 使用泛型描述 index type
+
+```
+interface Options<T> {
+    [name: string]: T
+}
+
+let inputOptions: Options<boolean> = {
+    'disabled': false,
+    'visible': true
+};
+```
+
+https://www.typescripttutorial.net/typescript-tutorial/typescript-generic-interfaces/
