@@ -2004,4 +2004,115 @@ let inputOptions: Options<boolean> = {
 };
 ```
 
-https://www.typescripttutorial.net/typescript-tutorial/typescript-generic-interfaces/
+## TypeScript Modules
+
+* TS module 包含 declarations and code
+* TS module 也跟 ES6 module 有著同樣的概念
+
+
+### Creating a new module
+
+```
+export interface Validator {
+    isValid(s: string): boolean
+}
+```
+
+### Export statements
+
+```
+interface Validator {
+    isValid(s: string): boolean
+}
+
+export { Validator };
+```
+
+* TS 也允許你改名字 export
+
+```
+interface Validator {
+    isValid(s: string): boolean
+}
+
+export { Validator as StringValidator };
+```
+
+### Importing a new module
+
+* 使用 module 範例
+
+```
+import { Validator } from './Validator';
+
+class EmailValidator implements Validator {
+    isValid(s: string): boolean {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(s);
+    }
+}
+
+export { EmailValidator };
+```
+
+* 當你 import 一個 module 也可以 rename 
+  
+```
+import { Validator as StringValidator } from './Validator';
+
+import { Validator as StringValidator } from './Validator';
+
+class EmailValidator implements StringValidator {
+    isValid(s: string): boolean {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(s);
+    }
+}
+
+export { EmailValidator };
+```
+
+* 下面範例描述如何使用  EmailValidator
+
+```
+import { EmailValidator } from './EmailValidator';
+
+let email = 'john.doe@typescripttutorial.net';
+let validator = new EmailValidator();
+let result = validator.isValid(email);
+
+console.log(result); // true
+```
+
+### Importing types
+
+* 下面宣告 type 的 module
+  
+```
+export type alphanumeric = string | number;
+```
+
+* 如果要引用 type 的 module 可以如下列這樣寫
+* TS 3.8 開始支援 import type 的寫法
+
+```
+import type {alphanumeric} from './Types';
+```
+
+* 3.8 之前的 import 範例
+
+```
+import {alphanumeric} from './Types';
+```
+
+### Importing everything from a module
+
+* import 全部範例
+
+```
+import * from 'module_name';
+```
+
+### Re-exports
+
+https://www.typescripttutorial.net/typescript-tutorial/typescript-modules/
